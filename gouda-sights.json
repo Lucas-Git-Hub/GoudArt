@@ -1,6 +1,6 @@
 [
     {
-        "key": 1,
+        "key": 0,
         "coordinates":{
         "latitude": 52.01353536518806, 
         "longitude": 4.707544400000001
@@ -9,7 +9,7 @@
         "description":"Brandweerman standbeeld"
     },
     {
-        "key": 2,
+        "key": 1,
         "coordinates":{
         "latitude": 52.01186056336226,
         "longitude": 4.703842940739362

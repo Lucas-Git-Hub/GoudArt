@@ -1,13 +1,25 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 const Listview = () => {
-    const [sights, setSights] = useState([]);
-
+    const [sights, setSights] = useState([
+        {
+            key: 0,
+            title: "Ape",
+        },
+        {
+            key: 1,
+            title: "Ape2",
+        }
+    ]);
+    
     return (
         <View style={styles.container}>
-            <Text>Listview</Text>
+            <FlatList
+                data={sights}
+                renderItem={({item}) => <Text>{item.key}: {item.title} </Text>}
+            />
             <StatusBar style="auto" />
         </View>
     );
