@@ -11,10 +11,10 @@
     {
         "key": 2,
         "coordinates":{
-        "latitude": 51.5,
-        "longitude": 4
+        "latitude": 52.01186056336226,
+        "longitude": 4.703842940739362
         },
-        "title":"Test", 
-        "description":"Hierin komt de data ervan 2"
+        "title":"De Omgekeerde Wereld", 
+        "description":"Man tilt paard op zijn rug"
     }
 ]

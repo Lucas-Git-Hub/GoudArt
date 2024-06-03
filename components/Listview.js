@@ -1,11 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import MapView from 'react-native-maps';
+import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const Map = () => {
+const Listview = () => {
+    const [sights, setSights] = useState([]);
+
     return (
         <View style={styles.container}>
-            <MapView style={styles.map}/>
+            <Text>Listview</Text>
             <StatusBar style="auto" />
         </View>
     );
@@ -18,10 +20,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    map: {
-        width: '100%',
-        height: '100%',
-    },
 });
   
-export default Map;
+export default Listview;

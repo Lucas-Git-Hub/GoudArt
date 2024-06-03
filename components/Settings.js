@@ -17,6 +17,6 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-  });
+});
   
-  export default Settings;
+export default Settings;
