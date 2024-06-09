@@ -5,18 +5,10 @@ import { useEffect, useState } from 'react';
 
 const Map = ( { route, navigation } ) => {
     const [sights, setSights] = useState([]);
-    const [test, setTests] = useState([
-        { 
-            key: 0,
-            title: "Test",
-            coordinate: {
-                latitude: 52.01353536518806, 
-                longitude: 4.707544400000001
-            },
-            description: "Testing"
-        }
-    ])
-    const [region, setRegion] = useState();
+    const [region, setRegion] = useState({
+        latitude: 52,
+        longitude: 4.7
+    });
 
     // Get data
     async function getLocationData(){
@@ -36,38 +28,27 @@ const Map = ( { route, navigation } ) => {
         }
     }
 
-    // onRegionChange(region)
-    // {
-    //     setRegion({region});
-    // }
-
     //Load in data each time you enter the map for updates
     useEffect(() => {
         getLocationData();
     }, [])
 
-    // useEffect(() => {
-    //     console.log("params: "+ JSON.stringify(route.params))
-    //     //When coordinates are given with route change current region
-    //     if(route.params?.latitude && route.params?.longitude)
-    //         {
-    //             setRegion(route.params)
-    //             console.log("Region: "+ JSON.stringify(region))
-    //         }
-    // }, [route.params])
+    useEffect(() => {
+        //When coordinates are given with route change current region
+        if(route.params?.latitude && route.params?.longitude)
+            {
+                setRegion(route.params)
+                console.log("Region: "+ JSON.stringify(region)) //Bug with starterdata > delta values
+            }
+    }, [route.params])
 
     return (
         <View style={styles.container}>
             <MapView 
                 style={styles.map} 
                 showsUserLocation={true}
-                // region ={{
-                //     latitude: 52,
-                //     longitude: 4,
-                //     latitudeDelta: 0.0,
-                //     longitudeDelta: 0.0
-                // }}
-                // onRegionChange={onRegionChange}
+                region={region}
+                onRegionChangeComplete={(region) => setRegion(region)}
                 showsCompass={true}
             >
                 {/* Read sights array and place the markers on the map */}

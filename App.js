@@ -10,9 +10,6 @@ import { useState } from 'react';
 const Stack = createNativeStackNavigator();
 
 const App = () => {
-  const [sightsLocations, setSightsLocations] = useState([]);
-  const [currentLocation, setCurrentLocation] = useState([]);
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Map'>
