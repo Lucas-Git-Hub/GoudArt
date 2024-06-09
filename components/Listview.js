@@ -1,24 +1,47 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
-const Listview = () => {
-    const [sights, setSights] = useState([
-        {
-            key: 0,
-            title: "Ape",
-        },
-        {
-            key: 1,
-            title: "Ape2",
+
+
+const Listview = ( { navigation } ) => {
+    const [sights, setSights] = useState([]);
+
+    // Get data
+    async function getLocationData(){
+        try {
+        fetch("https://stud.hosted.hr.nl/0993934/prg07/gouda-sights.json", {
+            method: 'GET',
+            headers: {Accept: 'application/json'}
+        })
+        .then(res => res.json())
+            .then(data => {
+                setSights(data);
+                console.log("Succes")
+            })
+    
+        } catch (error) {
+            console.log(error);
         }
-    ]);
+    }
+
+    //Load in data each time you enter the map for updates
+    useEffect(() => {
+        getLocationData();
+    }, [])
     
     return (
         <View style={styles.container}>
             <FlatList
                 data={sights}
-                renderItem={({item}) => <Text>{item.key}: {item.title} </Text>}
+                renderItem={({item}) => 
+                    <Pressable style={styles.navigationButtons} onPress={() => navigation.navigate('Map', {
+                        latitude: item.coordinates.latitude,
+                        longitude: item.coordinates.longitude
+                    })}>
+                        <Text>{item.key}: {item.title}</Text>
+                    </Pressable>
+                }
             />
             <StatusBar style="auto" />
         </View>
@@ -32,6 +55,9 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    navigationButtons: {
+
+    }
 });
   
 export default Listview;
