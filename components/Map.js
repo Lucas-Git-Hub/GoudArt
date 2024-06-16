@@ -7,7 +7,9 @@ const Map = ( { route, navigation } ) => {
     const [sights, setSights] = useState([]);
     const [region, setRegion] = useState({
         latitude: 52,
-        longitude: 4.7
+        longitude: 4.7,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1
     });
 
     // Get data

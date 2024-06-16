@@ -37,7 +37,9 @@ const Listview = ( { navigation } ) => {
                 renderItem={({item}) => 
                     <Pressable style={styles.navigationButtons} onPress={() => navigation.navigate('Map', {
                         latitude: item.coordinates.latitude,
-                        longitude: item.coordinates.longitude
+                        longitude: item.coordinates.longitude,
+                        latitudeDelta: 0.1,
+                        longitudeDelta: 0.1
                     })}>
                         <Text>{item.key}: {item.title}</Text>
                     </Pressable>
