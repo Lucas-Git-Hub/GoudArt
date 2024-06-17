@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator();
 const App = () => {
     const [sights, setSights] = useState([]);
     const [theme, setTheme] = useState(false);
-    const [location, setLocation] = useState(null);
+    const [location, setLocation] = useState(null); // User's current location
     const [errorMsg, setErrorMsg] = useState(null);
     const styleTheme = theme ? stylesDark : stylesLight; 
   

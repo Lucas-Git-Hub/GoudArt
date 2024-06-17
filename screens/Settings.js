@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, Switch, Text, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Settings = ( { route, theme, setTheme } ) => {
@@ -14,6 +14,22 @@ const Settings = ( { route, theme, setTheme } ) => {
             console.log(e);
         }
     };
+
+    // Clear storage based on OS (asyncStorage.clear() gives error on iphone)
+    const clearAsyncStorage = async() => {
+        console.log('pressed')
+        const AsyncStorageKeys = await AsyncStorage.getAllKeys();
+        if(AsyncStorageKeys > 0){
+            if(Platform.OS === 'android'){
+                await AsyncStorage.clear();
+                console.log("Data Cleared");
+            }
+            if(Platform.OS === 'ios'){
+                await AsyncStorage.multiRemove(AsyncStorageKeys);
+                console.log("Data Cleared");
+            }
+        }
+    }
     
     // Save new darkmode state when it is changed in asyncstorage
     useEffect(() => {
@@ -30,6 +46,9 @@ const Settings = ( { route, theme, setTheme } ) => {
                 onValueChange={toggleSwitch}
                 value={theme}
             />
+            <Pressable style={styleTheme.clearButton} onPress = {clearAsyncStorage}>
+                <Text style={styleTheme.clearButton.text}>Clear Stored Data</Text>
+            </Pressable>
         </View>
     );
 }
@@ -43,6 +62,15 @@ const stylesLight = StyleSheet.create({
     },
     text: {
         color: '#000'
+    },
+    clearButton: {
+        backgroundColor: '#fff',
+        borderWidth: '1px solid',
+        borderRadius: '5px',
+        borderColor: '#000',
+        text: {
+            color: '#000'
+        }
     }
 });
 
@@ -55,6 +83,15 @@ const stylesDark = StyleSheet.create({
     },
     text: {
         color: '#fff'
+    },
+    clearButton: {
+        backgroundColor: '#fff',
+        borderWidth: '1px solid',
+        borderRadius: '5px',
+        borderColor: '#000',
+        text: {
+            color: '#000'
+        }
     }
 });
   
