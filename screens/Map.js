@@ -1,9 +1,13 @@
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
+import MapDark from '../map_styles/map-dark';
 
 const Map = ( { route, navigation, sights, theme } ) => {
+    // Set theme for map and other elements based on theme
     const styleTheme = theme ? stylesDark : stylesLight; 
+    const mapStyle = theme ? MapDark : [];
+
     const [region, setRegion] = useState({
         latitude: 52,
         longitude: 4.7,
@@ -27,6 +31,7 @@ const Map = ( { route, navigation, sights, theme } ) => {
                 region={region}
                 onRegionChangeComplete={(region) => setRegion(region)}
                 showsCompass={true}
+                customMapStyle={mapStyle} // Only works for android
             >
                 {/* Read sights array and place the markers on the map */}
                 {sights.map((marker) => (
