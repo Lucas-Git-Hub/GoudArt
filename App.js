@@ -2,10 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import Settings from './components/Settings';
-import Map from './components/Map';
-import Listview from './components/Listview';
-import { useState } from 'react';
+import Settings from './screens/Settings';
+import Map from './screens/Map';
+import Listview from './screens/Listview';
 
 const Stack = createNativeStackNavigator();
 
