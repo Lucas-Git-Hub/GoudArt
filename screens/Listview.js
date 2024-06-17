@@ -1,23 +1,32 @@
 import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
+const Listview = ( { route, navigation, sights, theme } ) => {
+    const [styleTheme, setStyleTheme] = useState(stylesLight)
 
+    useEffect(() => {   
+        // Update theme if needed
+        if(theme === true)
+        {
+            setStyleTheme(stylesDark)
+        } else {
+            setStyleTheme(stylesLight)
+        }
+    }, [theme])
 
-const Listview = ( { route, navigation } ) => {
-    
     return (
-        <View style={styles.container}>
+        <View style={styleTheme.container}>
             <FlatList
-                data={route.params?.sights}
+                data={sights}
                 renderItem={({item}) => 
-                    <Pressable style={styles.navigationButtons} onPress={() => navigation.navigate('Map', {
+                    <Pressable style={styleTheme.navigationButtons} onPress={() => navigation.navigate('Map', {
                         latitude: item.coordinates.latitude,
                         longitude: item.coordinates.longitude,
                         // Zoom level on map
                         latitudeDelta: 0.001,
                         longitudeDelta: 0.001
                     })}>
-                        <Text>{item.key}: {item.title}</Text>
+                        <Text style={styleTheme.text}>{item.key}: {item.title}</Text>
                     </Pressable>
                 }
             />
@@ -25,7 +34,7 @@ const Listview = ( { route, navigation } ) => {
     );
 }
 
-const styles = StyleSheet.create({
+const stylesLight = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
@@ -35,10 +44,34 @@ const styles = StyleSheet.create({
     navigationButtons: {
         width: '10px',
         height: '20px',
-        borderColor: 'Black',
+        borderColor: '#000',
         borderWidth: '1px solid',
         padding: '30px',
-        marginVertical: 5
+        marginVertical: 5,
+        color: '#000'
+    },
+    text: {
+        color: '#000'
+    }
+});
+
+const stylesDark = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#000',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    navigationButtons: {
+        width: '10px',
+        height: '20px',
+        borderColor: '#fff',
+        borderWidth: '1px solid',
+        padding: '30px',
+        marginVertical: 5,
+    },
+    text: {
+        color: '#fff'
     }
 });
   

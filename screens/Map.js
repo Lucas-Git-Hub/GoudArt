@@ -1,9 +1,9 @@
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Map = ( { route, navigation } ) => {
+const Map = ( { route, navigation, sights, theme } ) => {
+    const [styleTheme, setStyleTheme] = useState(stylesLight)
     const [region, setRegion] = useState({
         latitude: 52,
         longitude: 4.7,
@@ -11,42 +11,35 @@ const Map = ( { route, navigation } ) => {
         longitudeDelta: 0.1
     });
 
-    const getData = async () => {
-        try {
-          const value = await AsyncStorage.getItem('theme');
-          if (value !== null) {
-            // value previously stored
-            console.log(value)
-          }
-        } catch (e) {
-          // error reading value
-          console.log(e)
-        }
-      };
-
-    useEffect(() => {
-        getData();
-    }, [])
-
     useEffect(() => {
         //When coordinates are given with route, change current region
         if(route.params?.latitude && route.params?.longitude)
-            {
-                setRegion(route.params)
-            }
+        {
+            setRegion(route.params)
+        }
     }, [route.params])
 
+    useEffect(() => {   
+        // Update theme if needed
+        if(theme === true)
+        {
+            setStyleTheme(stylesDark)
+        } else {
+            setStyleTheme(stylesLight)
+        }
+    }, [theme])
+
     return (
-        <View style={styles.container}>
+        <View style={styleTheme.container}>
             <MapView 
-                style={styles.map} 
+                style={styleTheme.map} 
                 showsUserLocation={true}
                 region={region}
                 onRegionChangeComplete={(region) => setRegion(region)}
                 showsCompass={true}
             >
                 {/* Read sights array and place the markers on the map */}
-                {route.params?.sights.map((marker) => (
+                {sights.map((marker) => (
                     <Marker
                         key={marker.key}
                         coordinate={marker.coordinates}
@@ -59,10 +52,23 @@ const Map = ( { route, navigation } ) => {
     );
 }
 
-const styles = StyleSheet.create({
+const stylesLight = StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    map: {
+        width: '100%',
+        height: '100%',
+    },
+});
+
+const stylesDark = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#000',
       alignItems: 'center',
       justifyContent: 'center',
     },

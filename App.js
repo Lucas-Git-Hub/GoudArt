@@ -6,13 +6,14 @@ import Map from './screens/Map';
 import Listview from './screens/Listview';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useEffect, useState } from 'react';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 
 const Tab = createBottomTabNavigator();
 
 const App = () => {
     const [sights, setSights] = useState(undefined);
+    const [DarkMode, setDarkMode] = useState(false);
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
   
@@ -37,7 +38,7 @@ const App = () => {
       text = JSON.stringify(location);
     }
 
-    // Get data
+    // Get sight locations data
     async function getLocationData(){
       try {
       await fetch("https://lucas-git-hub.github.io/jsonFetch/gouda-sights.json", {
@@ -55,34 +56,42 @@ const App = () => {
       }
   }
 
+  const getTheme = async () => {
+    try {
+      const value = await AsyncStorage.getItem('theme');
+      if (value !== null) {
+        // value previously stored
+        if(value == "Dark")
+        {
+            setDarkMode(true);
+        } else {
+            setDarkMode(false);
+        }
+      }
+    } catch (e) {
+      // error reading value
+      console.log(e)
+    }
+  };
+
   //Load in data each time you enter the app for updates
   useEffect(() => {
-      getLocationData();
+    getLocationData();
+    getTheme();
   }, [])
-
-  if(sights === undefined) //Wait for data to be loaded before showing screens
-    {
-      return <Text>still loading...</Text>
-    }
 
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName='Map'>
-        <Tab.Screen
-          name="Map"
-          component={Map}
-          initialParams={{ sights: sights}}
-          options= {{ headerShown: false }}
-        />
-        <Tab.Screen
-          name="Locations"
-          component={Listview}
-          initialParams={{ sights: sights}}
-        />
-        <Tab.Screen
-          name="Settings"
-          component={Settings}
-        />
+      <Tab.Navigator initialRouteName='Locations'>
+        <Tab.Screen name="Map">
+          {(props) => <Map {...props} sights={sights} theme= {DarkMode}/>}
+        </Tab.Screen>
+        <Tab.Screen name="Locations">
+          {(props) => <Listview {...props} sights={sights} theme= {DarkMode}/>}
+        </Tab.Screen>
+        <Tab.Screen name="Settings">
+          {(props) => <Settings {...props} theme= {DarkMode} setTheme= {setDarkMode}/>}
+        </Tab.Screen>
       </Tab.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>

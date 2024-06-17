@@ -2,33 +2,11 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Switch, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Settings = () => {
-    const [DarkMode, SetDarkMode] = useState(false);
-    const toggleSwitch = () => SetDarkMode(previousState => !previousState) // Update state;
+const Settings = ( { route, theme, setTheme } ) => {
+    const [styleTheme, setStyleTheme] = useState(stylesLight)
+    const toggleSwitch = () => setTheme(previousState => !previousState) // Update state;
 
-    const getData = async () => {
-        try {
-          const value = await AsyncStorage.getItem('theme');
-          if (value !== null) {
-            // value previously stored
-            if(value == "Dark")
-            {
-                SetDarkMode(true);
-            } else {
-                SetDarkMode(false);
-            }
-          }
-        } catch (e) {
-          // error reading value
-          console.log(e)
-        }
-      };
-
-    useEffect(() => {
-        getData();
-    }, [])
-
-    const storeData = async (value) => {
+    const storeTheme = async (value) => {
         try {
           await AsyncStorage.setItem('theme', value);
         } catch (e) {
@@ -36,25 +14,35 @@ const Settings = () => {
           console.log(e);
         }
       };
-
-    useEffect(() => {
-        if(DarkMode)
+    
+    useEffect(() => {   
+        // Update theme if needed
+        if(theme === true)
         {
-            storeData("Dark") // Save new state in asyncstorage
+            setStyleTheme(stylesDark)
         } else {
-            storeData("Light") // Save new state in asyncstorage
+            setStyleTheme(stylesLight)
         }
-    }, [DarkMode])
+    }, [theme])
+
+    useEffect(() => { // Save new darkmode state when it is changed in asyncstorage
+        if(theme)
+        {
+            storeTheme("Dark")
+        } else {
+            storeTheme("Light")
+        }
+    }, [theme])
 
     return (
-        <View style={DarkMode ? stylesDark.container : stylesLight.container}>
-            <Text>Settings</Text>
+        <View style={styleTheme.container}>
+            <Text style={styleTheme.text}>Theme</Text>
             <Switch 
                 trackColor={{false: '#81b0ff', true: '#767577'}}
-                thumbColor={DarkMode ? '#f5dd4b' : '#f4f3f4'}
+                thumbColor={theme ? '#f5dd4b' : '#f4f3f4'}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={toggleSwitch}
-                value={DarkMode}
+                value={theme}
             />
         </View>
     );
@@ -67,6 +55,9 @@ const stylesLight = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    text: {
+        color: '#000'
+    }
 });
 
 const stylesDark = StyleSheet.create({
@@ -76,6 +67,9 @@ const stylesDark = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    text: {
+        color: '#fff'
+    }
 });
   
 export default Settings;
