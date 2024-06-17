@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 const Listview = ( { route, navigation, sights, theme } ) => {
-    const styleTheme = theme === true ? stylesDark : stylesLight;
+    const styleTheme = theme ? stylesDark : stylesLight;
 
     return (
         <View style={styleTheme.container}>

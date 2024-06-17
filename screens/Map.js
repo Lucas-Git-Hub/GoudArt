@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
 
 const Map = ( { route, navigation, sights, theme } ) => {
-    const styleTheme = theme === true ? stylesDark : stylesLight;
+    const styleTheme = theme ? stylesDark : stylesLight; 
     const [region, setRegion] = useState({
         latitude: 52,
         longitude: 4.7,

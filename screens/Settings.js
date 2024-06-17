@@ -3,7 +3,7 @@ import { StyleSheet, Switch, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Settings = ( { route, theme, setTheme } ) => {
-    const styleTheme = theme === true ? stylesDark : stylesLight
+    const styleTheme = theme ? stylesDark : stylesLight
     const toggleSwitch = () => setTheme(previousState => !previousState) // Update state when switched;
 
     const storeTheme = async (value) => {
@@ -17,7 +17,7 @@ const Settings = ( { route, theme, setTheme } ) => {
     
     // Save new darkmode state when it is changed in asyncstorage
     useEffect(() => {
-        theme === true ? storeTheme("Dark") : storeTheme("Light");
+        theme ? storeTheme("Dark") : storeTheme("Light");
     }, [theme])
 
     return (
