@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
 
 const Map = ( { route, navigation, sights, theme } ) => {
-    const [styleTheme, setStyleTheme] = useState(stylesLight)
+    const styleTheme = theme === true ? stylesDark : stylesLight;
     const [region, setRegion] = useState({
         latitude: 52,
         longitude: 4.7,
@@ -18,16 +18,6 @@ const Map = ( { route, navigation, sights, theme } ) => {
             setRegion(route.params)
         }
     }, [route.params])
-
-    useEffect(() => {   
-        // Update theme if needed
-        if(theme === true)
-        {
-            setStyleTheme(stylesDark)
-        } else {
-            setStyleTheme(stylesLight)
-        }
-    }, [theme])
 
     return (
         <View style={styleTheme.container}>

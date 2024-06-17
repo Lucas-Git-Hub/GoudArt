@@ -12,12 +12,13 @@ import * as Location from 'expo-location';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-    const [sights, setSights] = useState(undefined);
-    const [DarkMode, setDarkMode] = useState(false);
+    const [sights, setSights] = useState([]);
+    const [theme, setTheme] = useState(false);
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
   
-    useEffect(() => { //Ask permission to use location
+    //Ask permission to use location
+    useEffect(() => { 
       (async () => {
         
         let { status } = await Location.requestForegroundPermissionsAsync();
@@ -54,19 +55,14 @@ const App = () => {
       } catch (error) {
           console.log(error);
       }
-  }
+  };
 
   const getTheme = async () => {
     try {
       const value = await AsyncStorage.getItem('theme');
       if (value !== null) {
         // value previously stored
-        if(value == "Dark")
-        {
-            setDarkMode(true);
-        } else {
-            setDarkMode(false);
-        }
+        value === "Dark" ? setTheme(true) : setTheme(false)
       }
     } catch (e) {
       // error reading value
@@ -74,7 +70,7 @@ const App = () => {
     }
   };
 
-  //Load in data each time you enter the app for updates
+  //Load in data each time you enter the app for updates (on startup)
   useEffect(() => {
     getLocationData();
     getTheme();
@@ -84,13 +80,13 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator initialRouteName='Locations'>
         <Tab.Screen name="Map">
-          {(props) => <Map {...props} sights={sights} theme= {DarkMode}/>}
+          {(props) => <Map {...props} sights={sights} theme={theme}/>}
         </Tab.Screen>
         <Tab.Screen name="Locations">
-          {(props) => <Listview {...props} sights={sights} theme= {DarkMode}/>}
+          {(props) => <Listview {...props} sights={sights} theme={theme}/>}
         </Tab.Screen>
         <Tab.Screen name="Settings">
-          {(props) => <Settings {...props} theme= {DarkMode} setTheme= {setDarkMode}/>}
+          {(props) => <Settings {...props} theme= {theme} setTheme={setTheme}/>}
         </Tab.Screen>
       </Tab.Navigator>
       <StatusBar style="auto" />

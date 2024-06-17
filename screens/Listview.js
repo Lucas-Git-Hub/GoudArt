@@ -2,17 +2,7 @@ import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 const Listview = ( { route, navigation, sights, theme } ) => {
-    const [styleTheme, setStyleTheme] = useState(stylesLight)
-
-    useEffect(() => {   
-        // Update theme if needed
-        if(theme === true)
-        {
-            setStyleTheme(stylesDark)
-        } else {
-            setStyleTheme(stylesLight)
-        }
-    }, [theme])
+    const styleTheme = theme === true ? stylesDark : stylesLight;
 
     return (
         <View style={styleTheme.container}>
