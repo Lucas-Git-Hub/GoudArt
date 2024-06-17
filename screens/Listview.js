@@ -33,7 +33,12 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
     navigationButtons: {
-
+        width: '10px',
+        height: '20px',
+        borderColor: 'Black',
+        borderWidth: '1px solid',
+        padding: '30px',
+        marginVertical: 5
     }
 });
   

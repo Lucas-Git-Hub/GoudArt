@@ -1,6 +1,7 @@
 import MapView, { Marker } from 'react-native-maps';
 import { StyleSheet, View } from 'react-native';
 import { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Map = ( { route, navigation } ) => {
     const [region, setRegion] = useState({
@@ -9,6 +10,23 @@ const Map = ( { route, navigation } ) => {
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
     });
+
+    const getData = async () => {
+        try {
+          const value = await AsyncStorage.getItem('theme');
+          if (value !== null) {
+            // value previously stored
+            console.log(value)
+          }
+        } catch (e) {
+          // error reading value
+          console.log(e)
+        }
+      };
+
+    useEffect(() => {
+        getData();
+    }, [])
 
     useEffect(() => {
         //When coordinates are given with route, change current region
