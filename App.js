@@ -1,32 +1,67 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Settings from './screens/Settings';
 import Map from './screens/Map';
 import Listview from './screens/Listview';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useEffect, useState } from 'react';
 
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const App = () => {
+    const [sights, setSights] = useState(undefined);
+
+    // Get data
+    async function getLocationData(){
+      try {
+      await fetch("https://lucas-git-hub.github.io/jsonFetch/gouda-sights.json", {
+          method: 'GET',
+          headers: {Accept: 'application/json'}
+      })
+      .then(res => res.json())
+          .then(data => {
+              setSights(data);
+              console.log('Succes')
+          })
+
+      } catch (error) {
+          console.log(error);
+      }
+  }
+
+  //Load in data each time you enter the app for updates
+  useEffect(() => {
+      getLocationData();
+  }, [])
+
+  if(sights === undefined) //Wait for data to be loaded before showing screens
+    {
+      return <Text>still loading...</Text>
+    }
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Map'>
-        <Stack.Screen
+      <Tab.Navigator initialRouteName='Map'>
+        <Tab.Screen
           name="Map"
           component={Map}
+          initialParams={{ sights: sights}}
           options= {{ headerShown: false }}
         />
-        <Stack.Screen
+        <Tab.Screen
           name="Locations"
           component={Listview}
+          initialParams={{ sights: sights}}
         />
-        <Stack.Screen
+        <Tab.Screen
           name="Settings"
           component={Settings}
         />
-      </Stack.Navigator>
+      </Tab.Navigator>
+      <StatusBar style="auto" />
     </NavigationContainer>
+    
   );
 }
 
