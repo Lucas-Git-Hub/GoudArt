@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +17,7 @@ const App = () => {
     const [theme, setTheme] = useState(false);
     const [location, setLocation] = useState(null);
     const [errorMsg, setErrorMsg] = useState(null);
+    const styleTheme = theme ? stylesDark : stylesLight; 
   
     //Ask permission to use location
     useEffect(() => { 
@@ -78,14 +80,46 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator initialRouteName='Locations'>
-        <Tab.Screen name="Map">
+      <Tab.Navigator 
+      initialRouteName='Locations'
+      screenOptions={{
+        tabBarStyle: styleTheme.tabContainer,
+        tabBarLabelStyle: styleTheme.tabLabel
+      }}>
+        <Tab.Screen 
+          name="Map" 
+          options={{ 
+            headerStyle: styleTheme.tabHeaderBackground, 
+            headerTintColor: theme ? '#fff' : '#000',
+            tabBarIcon: () => (
+              <FontAwesome name="map" size={24} color={theme ? 'white' : 'black'}/>
+            ),
+          }}
+        >
           {(props) => <Map {...props} sights={sights} theme={theme}/>}
         </Tab.Screen>
-        <Tab.Screen name="Locations">
+        <Tab.Screen 
+          name="Locations"
+          options={{ 
+            headerStyle: styleTheme.tabHeaderBackground, 
+            headerTintColor: theme ? '#fff' : '#000', 
+            tabBarIcon: () => (
+              <FontAwesome name="map-signs" size={24} color={theme ? 'white' : 'black'}/>
+            ),
+          }}
+        >
           {(props) => <Listview {...props} sights={sights} theme={theme}/>}
         </Tab.Screen>
-        <Tab.Screen name="Settings">
+        <Tab.Screen 
+          name="Settings"
+          options={{ 
+            headerStyle: styleTheme.tabHeaderBackground, 
+            headerTintColor: theme ? '#fff' : '#000',
+            tabBarIcon: () => (
+              <FontAwesome name="gear" size={24} color={theme ? 'white' : 'black'}/>
+            ),
+          }}
+        >
           {(props) => <Settings {...props} theme= {theme} setTheme={setTheme}/>}
         </Tab.Screen>
       </Tab.Navigator>
@@ -95,13 +129,34 @@ const App = () => {
   );
 }
 
-const styles = StyleSheet.create({
+const stylesLight = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  tabContainer: {
+    backgroundColor: '#fff'
+  },
+  tabHeaderBackground: {
+    backgroundColor: '#fff',
+  }
+});
+
+const stylesDark = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabContainer: {
+    backgroundColor: '#000'
+  },
+  tabHeaderBackground: {
+    backgroundColor: '#000',
+  }
 });
 
 export default App;
