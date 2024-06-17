@@ -15,15 +15,13 @@ const Map = ( { route, navigation } ) => {
     // Get data
     async function getLocationData(){
         try {
-        await fetch("https://stud.hosted.hr.nl/0993934/prg07/gouda-sights.json", {
+        await fetch("https://lucas-git-hub.github.io/jsonFetch/gouda-sights.json", {
             method: 'GET',
-            mode: 'no-cors',
-            headers: {Accept: 'application/json', Host: 'stud.hosted.hr.nl'},
-            redirect: 'manual',
+            headers: {Accept: 'application/json'}
         })
-        .then(res => res.text())
+        .then(res => res.json())
             .then(data => {
-                // setSights(data);
+                setSights(data);
                 console.log(data)
             })
     

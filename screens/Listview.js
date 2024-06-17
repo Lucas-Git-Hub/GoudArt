@@ -10,7 +10,7 @@ const Listview = ( { navigation } ) => {
     // Get data
     async function getLocationData(){
         try {
-        await fetch("https://stud.hosted.hr.nl/0993934/prg07/gouda-sights.json", {
+        await fetch("https://lucas-git-hub.github.io/jsonFetch/gouda-sights.json", {
             method: 'GET',
             headers: {Accept: 'application/json'}
         })
