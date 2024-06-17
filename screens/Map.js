@@ -22,7 +22,7 @@ const Map = ( { route, navigation } ) => {
         .then(res => res.json())
             .then(data => {
                 setSights(data);
-                console.log(data)
+                console.log('Succes')
             })
     
         } catch (error) {
