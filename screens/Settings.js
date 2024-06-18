@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Platform, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Settings = ( { route, theme, setTheme } ) => {
+const Settings = ( { route, theme, setTheme, getTheme } ) => {
     const styleTheme = theme ? stylesDark : stylesLight
     const toggleSwitch = () => setTheme(previousState => !previousState) // Update state when switched;
 
@@ -19,14 +19,18 @@ const Settings = ( { route, theme, setTheme } ) => {
     const clearAsyncStorage = async() => {
         console.log('pressed')
         const AsyncStorageKeys = await AsyncStorage.getAllKeys();
-        if(AsyncStorageKeys > 0){
+        if(AsyncStorageKeys.length > 0){
             if(Platform.OS === 'android'){
                 await AsyncStorage.clear();
                 console.log("Data Cleared");
+                // Update to default settings
+                getTheme();
             }
             if(Platform.OS === 'ios'){
                 await AsyncStorage.multiRemove(AsyncStorageKeys);
                 console.log("Data Cleared");
+                // Update to default settings
+                getTheme();
             }
         }
     }

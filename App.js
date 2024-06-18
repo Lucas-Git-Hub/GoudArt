@@ -63,8 +63,13 @@ const App = () => {
     try {
       const value = await AsyncStorage.getItem('theme');
       if (value !== null) {
-        // value previously stored
+        // Use saved theme
         value === "Dark" ? setTheme(true) : setTheme(false)
+        console.log(value)
+      } else {
+        // Use default theme if there's none saved
+        setTheme(false);
+        console.log("Default Theme")
       }
     } catch (e) {
       // error reading value
@@ -120,7 +125,7 @@ const App = () => {
             ),
           }}
         >
-          {(props) => <Settings {...props} theme= {theme} setTheme={setTheme}/>}
+          {(props) => <Settings {...props} theme= {theme} setTheme={setTheme} getTheme={getTheme}/>}
         </Tab.Screen>
       </Tab.Navigator>
       <StatusBar style="auto" />
