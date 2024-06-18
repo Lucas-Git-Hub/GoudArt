@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import LocationListItem from '../components/LocationListItem';
 
 const Listview = ( { route, navigation, sights, theme } ) => {
     const styleTheme = theme ? stylesDark : stylesLight;
@@ -9,15 +10,11 @@ const Listview = ( { route, navigation, sights, theme } ) => {
             <FlatList
                 data={sights}
                 renderItem={({item}) => 
-                    <Pressable style={styleTheme.navigationButtons} onPress={() => navigation.navigate('Map', {
-                        latitude: item.coordinates.latitude,
-                        longitude: item.coordinates.longitude,
-                        // Zoom level on map
-                        latitudeDelta: 0.001,
-                        longitudeDelta: 0.001
-                    })}>
-                        <Text style={styleTheme.text}>{item.key}: {item.title}</Text>
-                    </Pressable>
+                    <LocationListItem
+                        navigation={navigation}
+                        item={item}
+                        theme={theme}
+                    />
                 }
             />
         </View>
@@ -31,18 +28,6 @@ const stylesLight = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    navigationButtons: {
-        width: '10px',
-        height: '20px',
-        borderColor: '#000',
-        borderWidth: '1px solid',
-        padding: '30px',
-        marginVertical: 5,
-        color: '#000'
-    },
-    text: {
-        color: '#000'
-    }
 });
 
 const stylesDark = StyleSheet.create({
@@ -52,17 +37,6 @@ const stylesDark = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
-    navigationButtons: {
-        width: '10px',
-        height: '20px',
-        borderColor: '#fff',
-        borderWidth: '1px solid',
-        padding: '30px',
-        marginVertical: 5,
-    },
-    text: {
-        color: '#fff'
-    }
 });
   
 export default Listview;
