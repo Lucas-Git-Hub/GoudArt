@@ -85,6 +85,7 @@ const App = () => {
   
   return (
     <NavigationContainer>
+      <StatusBar style={theme ? 'light' : 'dark'}/>
       <Tab.Navigator 
       initialRouteName='Locations'
       screenOptions={{
@@ -128,7 +129,6 @@ const App = () => {
           {(props) => <Settings {...props} theme= {theme} setTheme={setTheme} getTheme={getTheme}/>}
         </Tab.Screen>
       </Tab.Navigator>
-      <StatusBar style="auto" />
     </NavigationContainer>
     
   );
