@@ -9,10 +9,11 @@ const Map = ( { route, sights, theme } ) => {
     const mapStyle = theme ? MapDark : [];
 
     const [region, setRegion] = useState({
-        latitude: 52,
-        longitude: 4.7,
-        latitudeDelta: 0.1,
-        longitudeDelta: 0.1
+        // Starter region is in the middle of Gouda
+        latitude: 52.01990,
+        longitude: 4.70973,
+        latitudeDelta: 0.06,
+        longitudeDelta: 0.06
     });
 
     useEffect(() => {
