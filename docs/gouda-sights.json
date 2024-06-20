@@ -16,5 +16,77 @@
         },
         "title":"De Omgekeerde Wereld", 
         "description":"Man tilt paard op zijn rug"
+    },
+    {
+        "key": 2,
+        "coordinates":{
+        "latitude": 52.01233519630724,
+        "longitude": 4.710885766427248
+        },
+        "title":"De Goudse Waag", 
+        "description":"17e-eeuwse waag met exposities over kaasmaken en lokale ambachten. Er is ook een proeflokaal."
+    },
+    {
+        "key": 4,
+        "coordinates":{
+        "latitude": 52.011709917230384, 
+        "longitude": 4.710559880369563
+        },
+        "title":"Het oude stadhuis van Gouda", 
+        "description":"Gebouwd in de vijftiende eeuw en staat midden in het sfeervolle, historische stadshart van Gouda."
+    },
+    {
+        "key": 5,
+        "coordinates":{
+        "latitude": 52.01087894525289, 
+        "longitude": 4.710735394052678
+        },
+        "title":"Sint-Janskerk", 
+        "description":"Dit gotische bouwwerk, beroemd om zijn 72 glas-in-loodramen, is de langste kerk van Nederland."
+    },
+    {
+        "key": 6,
+        "coordinates":{
+        "latitude": 52.01075119375294, 
+        "longitude": 4.712526055311663
+        },
+        "title":"Beeld van Dirck en Wouter Crabeth", 
+        "description":"Een standbeeld ter ere van de beroemde 16e-eeuwse glas-in-loodkunstenaars Dirck en Wouter Crabeth."
+    },
+    {
+        "key": 7,
+        "coordinates":{
+        "latitude": 52.01003173946046,
+        "longitude": 4.71109909773394
+        },
+        "title":"Museum Gouda", 
+        "description":"Museum met 16e-eeuwse religieuze kunst, werken van de Haagse School en 20e-eeuws aardewerk."
+    },
+    {
+        "key": 8,
+        "coordinates":{
+        "latitude": 52.00728753807549,
+        "longitude": 4.709687768332889
+        },
+        "title":"Museumhaven Gouda", 
+        "description":"Een museumhaven waar historische schepen te zien zijn en inzicht wordt gegeven in de maritieme geschiedenis van Gouda."
+    },
+    {
+        "key": 9,
+        "coordinates":{
+        "latitude": 52.01017092064121,
+        "longitude": 4.707039702657503
+        },
+        "title":"Sint Joostkapel", 
+        "description":"Een kleine kapel met historische betekenis, die een kijkje biedt in de religieuze geschiedenis van Gouda."
+    },
+    {
+        "key": 10,
+        "coordinates":{
+        "latitude": 52.014781523792465,
+        "longitude": 4.710600150048026
+        },
+        "title":"Gouda Cheese Experience", 
+        "description":"Een interactief museum gewijd aan de geschiedenis en productie van Goudse kaas."
     }
 ]
