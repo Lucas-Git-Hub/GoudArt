@@ -51,7 +51,8 @@ const stylesLight = StyleSheet.create({
         flex: 1,
         fontWeight: 'bold',
         color: 'orange',
-        fontSize: 16
+        fontSize: 16,
+        paddingBottom: 2
       },
       description: {
         flex: 1,
@@ -92,7 +93,8 @@ const stylesDark = StyleSheet.create({
         flex: 1,
         fontWeight: 'bold',
         color: 'orange',
-        fontSize: 16
+        fontSize: 16,
+        paddingBottom: 2
     },
     description: {
         flex: 1,
