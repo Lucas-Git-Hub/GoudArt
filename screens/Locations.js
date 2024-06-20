@@ -27,7 +27,8 @@ const stylesLight = StyleSheet.create({
       backgroundColor: '#f5f5f5',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 10
+      padding: 10,
+      paddingBottom: 0
     },
 });
 
