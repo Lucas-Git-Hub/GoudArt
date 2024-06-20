@@ -46,7 +46,7 @@ const Settings = ( { theme, setTheme, getTheme } ) => {
             <View style={styleTheme.settingContainer}>
                 <TextSwitch
                     theme={theme}
-                    text="Theme:"
+                    text={`Theme: ${theme ? 'Dark' : 'Light'}`}
                     value={theme}
                     onValueChangeFunction={toggleSwitch}
                     
