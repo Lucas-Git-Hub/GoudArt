@@ -19,12 +19,13 @@ const stylesLight = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#000',
-        borderWidth: '1px solid',
-        borderRadius: '5px',
-        borderColor: '#000',
+        borderRadius: 100,
+        backgroundColor: 'darkblue',
+        padding: 20
     },
     text: {
-        color: '#fff'
+        color: 'orange',
+        fontWeight: 'bold'
     }
 });
 
@@ -33,13 +34,13 @@ const stylesDark = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff',
-        borderWidth: '1px solid',
-        borderRadius: '5px',
-        borderColor: '#000',
+        borderRadius: 100,
+        backgroundColor: 'darkblue',
+        padding: 20
     },
     text: {
-        color: '#000'
+        color: 'orange',
+        fontWeight: 'bold'
     }
 });
 

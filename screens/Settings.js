@@ -55,7 +55,7 @@ const Settings = ( { theme, setTheme, getTheme } ) => {
             <View style={styleTheme.settingContainer}>
                 <TextButton
                     theme={theme}
-                    text="Clear Stored Data"
+                    text="Clear Data"
                     onPressFunction={clearAsyncStorage}
                 />
             </View>
