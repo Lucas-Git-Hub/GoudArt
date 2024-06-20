@@ -18,7 +18,7 @@ const LocationListItem = ({ navigation, item, theme }) => {
                 <View style={styleTheme.buttonsContainer.buttonContainer}>
                     <FavoriteButton
                         theme={theme}
-                        favorite={item.favorite}
+                        itemKey={item.key}
                     />
                 </View>
             </View>

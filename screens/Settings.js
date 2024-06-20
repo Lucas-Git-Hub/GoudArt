@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Platform, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const Settings = ( { route, theme, setTheme, getTheme } ) => {
+const Settings = ( { theme, setTheme, getTheme } ) => {
     const styleTheme = theme ? stylesDark : stylesLight
     const toggleSwitch = () => setTheme(previousState => !previousState) // Update state when switched;
 
@@ -17,7 +17,6 @@ const Settings = ( { route, theme, setTheme, getTheme } ) => {
 
     // Clear storage based on OS (asyncStorage.clear() gives error on iphone)
     const clearAsyncStorage = async() => {
-        console.log('pressed')
         const AsyncStorageKeys = await AsyncStorage.getAllKeys();
         if(AsyncStorageKeys.length > 0){
             if(Platform.OS === 'android'){
@@ -35,7 +34,7 @@ const Settings = ( { route, theme, setTheme, getTheme } ) => {
         }
     }
     
-    // Save new darkmode state when it is changed in asyncstorage
+    // Store new darkmode state when it is changed in asyncstorage
     useEffect(() => {
         theme ? storeTheme("Dark") : storeTheme("Light");
     }, [theme])

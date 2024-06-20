@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Settings from './screens/Settings';
 import Map from './screens/Map';
-import Listview from './screens/Listview';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Location from 'expo-location';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import Locations from './screens/Locations';
 
 const Tab = createBottomTabNavigator();
 
@@ -65,7 +65,7 @@ const App = () => {
       if (value !== null) {
         // Use saved theme
         value === "Dark" ? setTheme(true) : setTheme(false)
-        console.log(value)
+        console.log("Current Stored Theme: " + value)
       } else {
         // Use default theme if there's none saved
         setTheme(false);
@@ -82,7 +82,7 @@ const App = () => {
     getLocationData();
     getTheme();
   }, [])
-
+  
   return (
     <NavigationContainer>
       <Tab.Navigator 
@@ -113,7 +113,7 @@ const App = () => {
             ),
           }}
         >
-          {(props) => <Listview {...props} sights={sights} theme={theme}/>}
+          {(props) => <Locations {...props} sights={sights} theme={theme}/>}
         </Tab.Screen>
         <Tab.Screen 
           name="Settings"

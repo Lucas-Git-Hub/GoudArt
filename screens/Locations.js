@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import LocationListItem from '../components/LocationListItem';
 
-const Listview = ( { route, navigation, sights, theme } ) => {
+const Locations = ( { navigation, sights, theme } ) => {
     const styleTheme = theme ? stylesDark : stylesLight;
 
     return (
@@ -39,4 +38,4 @@ const stylesDark = StyleSheet.create({
     },
 });
   
-export default Listview;
+export default Locations;
