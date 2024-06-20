@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { Platform, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import TextButton from '../components/TextButton';
+import TextSwitch from '../components/TextSwitch';
 
 const Settings = ( { theme, setTheme, getTheme } ) => {
     const styleTheme = theme ? stylesDark : stylesLight
@@ -41,17 +43,22 @@ const Settings = ( { theme, setTheme, getTheme } ) => {
 
     return (
         <View style={styleTheme.container}>
-            <Text style={styleTheme.text}>Theme</Text>
-            <Switch 
-                trackColor={{false: '#81b0ff', true: '#767577'}}
-                thumbColor={theme ? '#f5dd4b' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={theme}
-            />
-            <Pressable style={styleTheme.clearButton} onPress = {clearAsyncStorage}>
-                <Text style={styleTheme.clearButton.text}>Clear Stored Data</Text>
-            </Pressable>
+            <View style={styleTheme.settingContainer}>
+                <TextSwitch
+                    theme={theme}
+                    text="Theme:"
+                    value={theme}
+                    onValueChangeFunction={toggleSwitch}
+                    
+                />
+            </View>
+            <View style={styleTheme.settingContainer}>
+                <TextButton
+                    theme={theme}
+                    text="Clear Stored Data"
+                    onPressFunction={clearAsyncStorage}
+                />
+            </View>
         </View>
     );
 }
@@ -66,14 +73,10 @@ const stylesLight = StyleSheet.create({
     text: {
         color: '#000'
     },
-    clearButton: {
-        backgroundColor: '#fff',
-        borderWidth: '1px solid',
-        borderRadius: '5px',
-        borderColor: '#000',
-        text: {
-            color: '#000'
-        }
+    settingContainer: {
+        flex: 0.1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 
@@ -87,14 +90,10 @@ const stylesDark = StyleSheet.create({
     text: {
         color: '#fff'
     },
-    clearButton: {
-        backgroundColor: '#fff',
-        borderWidth: '1px solid',
-        borderRadius: '5px',
-        borderColor: '#000',
-        text: {
-            color: '#000'
-        }
+    settingContainer: {
+        flex: 0.1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
   
