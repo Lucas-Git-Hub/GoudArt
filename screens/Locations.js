@@ -7,6 +7,7 @@ const Locations = ( { navigation, sights, theme } ) => {
     return (
         <View style={styleTheme.container}>
             <FlatList
+                showsVerticalScrollIndicator={false}
                 data={sights}
                 renderItem={({item}) => 
                     <LocationListItem
@@ -23,18 +24,20 @@ const Locations = ( { navigation, sights, theme } ) => {
 const stylesLight = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#f5f5f5',
       alignItems: 'center',
       justifyContent: 'center',
+      padding: 10
     },
 });
 
 const stylesDark = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#000',
+      backgroundColor: '#0d0d0d',
       alignItems: 'center',
       justifyContent: 'center',
+      padding: 20
     },
 });
   

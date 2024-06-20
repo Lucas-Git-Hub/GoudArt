@@ -50,7 +50,7 @@ const Map = ( { route, sights, theme } ) => {
 const stylesLight = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#f5f5f5',
       alignItems: 'center',
       justifyContent: 'center',
     },
@@ -63,7 +63,7 @@ const stylesLight = StyleSheet.create({
 const stylesDark = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#000',
+      backgroundColor: '#0d0d0d',
       alignItems: 'center',
       justifyContent: 'center',
     },

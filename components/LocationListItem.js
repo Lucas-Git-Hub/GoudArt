@@ -7,7 +7,10 @@ const LocationListItem = ({ navigation, item, theme }) => {
 
     return (
         <View style={styleTheme.container}>
-            <Text style={styleTheme.text}>{item.title}</Text>
+            <View style={styleTheme.textContainer}>
+                <Text style={styleTheme.title}>{item.title}</Text>
+                <Text style={styleTheme.description}>{item.description}</Text>
+            </View>
             <View style={styleTheme.buttonsContainer}>
                 <View style={styleTheme.buttonsContainer.buttonContainer}>
                     <GoToLocationButton 
@@ -34,23 +37,34 @@ const stylesLight = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderBottomWidth: 5,
-        borderColor: '#000',
+        padding: 20,
+        borderRadius: 25,
+        marginBottom: 10
       },
-      text: {
-        flex: 0.6,
-        paddingLeft: 5,
+      textContainer: {
+        flex: 0.8,
+        padding: 5,
+        flexDirection: 'column',
+        justifyContent: 'center'
+      },
+      title: {
+        flex: 1,
+        fontWeight: 'bold',
+        color: 'orange',
+        fontSize: 16
+      },
+      description: {
+        flex: 1,
+        fontSize: 12,
       },
       buttonsContainer: {
-        flex: 0.4,
+        flex: 0.3,
         flexDirection: 'row',
-        flexWrap: 'nowrap',
         alignContent: 'center',
         alignItems: 'center',
 
         buttonContainer: {
             flex: 1,
-            borderLeftWidth: 5,
             padding: 5,
         },
     }
@@ -58,33 +72,42 @@ const stylesLight = StyleSheet.create({
 
 const stylesDark = StyleSheet.create({
     container: {
-      flex: 1,
-      flexDirection: 'row',
-      width: '100%',
-      backgroundColor: '#000',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      borderBottomWidth: 5,
-      borderColor: '#fff',
+        flex: 1,
+        flexDirection: 'row',
+        width: '100%',
+        backgroundColor: '#171717',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 20,
+        borderRadius: 25,
+        marginBottom: 10
     },
-    text: {
-        flex: 0.6,
-        paddingLeft: 5,
+    textContainer: {
+        flex: 0.8,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: 5  
+    },
+    title: {
+        flex: 1,
+        fontWeight: 'bold',
+        color: 'orange',
+        fontSize: 16
+    },
+    description: {
+        flex: 1,
+        fontSize: 12,
         color: '#fff'
     },
     buttonsContainer: {
-        flex: 0.4,
+        flex: 0.3,
         flexDirection: 'row',
-        flexWrap: 'nowrap',
         alignContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#000',
 
         buttonContainer: {
             flex: 1,
-            borderLeftWidth: 5,
             padding: 5,
-            borderLeftColor: '#fff'
         },
     }
 });

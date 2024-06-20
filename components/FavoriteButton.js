@@ -43,7 +43,7 @@ const FavoriteButton = ({ itemKey, theme }) => {
                 setFavorite(previousState => !previousState) //Change value to true or false
             }}
         >
-            <FontAwesome name={favorite ? "star" : "star-o"} size={24} color={ theme ? 'white' : 'black'}/>
+            <FontAwesome name={favorite ? "star" : "star-o"} size={24} color="orange"/>
         </Pressable>
     )
 }
