@@ -93,28 +93,29 @@ const App = () => {
         tabBarLabelStyle: styleTheme.tabLabel
       }}>
         <Tab.Screen 
-          name="Map" 
-          options={{ 
-            headerStyle: styleTheme.tabHeaderBackground, 
-            headerTintColor: theme ? '#fff' : '#000',
-            tabBarIcon: () => (
-              <FontAwesome name="map" size={24} color={theme ? 'white' : 'black'}/>
-            ),
-          }}
-        >
-          {(props) => <Map {...props} sights={sights} theme={theme}/>}
-        </Tab.Screen>
-        <Tab.Screen 
           name="Locations"
           options={{ 
             headerStyle: styleTheme.tabHeaderBackground, 
             headerTintColor: theme ? '#fff' : '#000', 
             tabBarIcon: () => (
-              <FontAwesome name="map-signs" size={24} color={theme ? 'white' : 'black'}/>
+              <FontAwesome name="map-signs" size={24} color='orange'/>
             ),
           }}
         >
           {(props) => <Locations {...props} sights={sights} theme={theme}/>}
+        </Tab.Screen>
+        <Tab.Screen 
+          name="Map" 
+          options={{ 
+            headerShown: false,
+            headerStyle: styleTheme.tabHeaderBackground, 
+            headerTintColor: theme ? '#fff' : '#000',
+            tabBarIcon: () => (
+              <FontAwesome name="map" size={24} color='orange'/>
+            ),
+          }}
+        >
+          {(props) => <Map {...props} sights={sights} theme={theme}/>}
         </Tab.Screen>
         <Tab.Screen 
           name="Settings"
@@ -122,7 +123,7 @@ const App = () => {
             headerStyle: styleTheme.tabHeaderBackground, 
             headerTintColor: theme ? '#fff' : '#000',
             tabBarIcon: () => (
-              <FontAwesome name="gear" size={24} color={theme ? 'white' : 'black'}/>
+              <FontAwesome name="gear" size={24} color='orange'/>
             ),
           }}
         >
