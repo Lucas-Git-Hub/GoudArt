@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Platform, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextButton from '../components/TextButton';
-import TextSwitch from '../components/TextSwitch';
+import IconTextSwitch from '../components/IconTextSwitch';
 
 const Settings = ( { theme, setTheme, getTheme } ) => {
     const styleTheme = theme ? stylesDark : stylesLight
@@ -44,9 +44,10 @@ const Settings = ( { theme, setTheme, getTheme } ) => {
     return (
         <View style={styleTheme.container}>
             <View style={styleTheme.settingContainer}>
-                <TextSwitch
+                <IconTextSwitch
                     theme={theme}
-                    text={`Theme: ${theme ? 'Dark' : 'Light'}`}
+                    icon='adjust'
+                    text={`${theme ? 'Dark' : 'Light'} Theme`}
                     value={theme}
                     onValueChangeFunction={toggleSwitch}
                     
