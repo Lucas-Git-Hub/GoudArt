@@ -77,6 +77,7 @@ const App = () => {
     if(sights.length === 0){ //Check if already fetched/list filled
       getLocationData();
     }
+    getTheme();
     askPermissionForUserLocation();
   }, [])
 
@@ -85,8 +86,6 @@ const App = () => {
     if(resetData === true){
       getTheme();
       setResetData(false);
-    } else {
-      getTheme();
     }
   }, [resetData])
   
