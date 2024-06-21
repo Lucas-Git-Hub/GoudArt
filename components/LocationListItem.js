@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import GoToLocationButton from "./GoToLocationButton";
 import FavoriteButton from "./FavoriteButton";
+import ShareButton from "./ShareButton";
 
 const LocationListItem = ({ navigation, item, theme, resetData }) => {
     const styleTheme = theme ? stylesDark : stylesLight;
@@ -16,6 +17,11 @@ const LocationListItem = ({ navigation, item, theme, resetData }) => {
                     <GoToLocationButton 
                         navigation={navigation}
                         coordinates={item.coordinates}
+                    />
+                </View>
+                <View style={styleTheme.buttonsContainer.buttonContainer}>
+                    <ShareButton
+                        message={`Bekijk deze locatie in Gouda: ${item.title}\nhttps://www.google.com/maps/place/${item.coordinates.latitude},${item.coordinates.longitude}`} //Share a link of the location to google maps
                     />
                 </View>
                 <View style={styleTheme.buttonsContainer.buttonContainer}>
@@ -42,7 +48,7 @@ const stylesLight = StyleSheet.create({
         marginBottom: 10
       },
       textContainer: {
-        flex: 0.8,
+        flex: 0.7,
         padding: 5,
         flexDirection: 'column',
         justifyContent: 'center'
@@ -59,7 +65,7 @@ const stylesLight = StyleSheet.create({
         fontSize: 12,
       },
       buttonsContainer: {
-        flex: 0.3,
+        flex: 0.35,
         flexDirection: 'row',
         alignContent: 'center',
         alignItems: 'center',
@@ -84,7 +90,7 @@ const stylesDark = StyleSheet.create({
         marginBottom: 10
     },
     textContainer: {
-        flex: 0.8,
+        flex: 0.7,
         flexDirection: 'column',
         justifyContent: 'center',
         padding: 5  
@@ -102,7 +108,7 @@ const stylesDark = StyleSheet.create({
         color: '#fff'
     },
     buttonsContainer: {
-        flex: 0.3,
+        flex: 0.35,
         flexDirection: 'row',
         alignContent: 'center',
         alignItems: 'center',
