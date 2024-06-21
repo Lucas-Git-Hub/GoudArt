@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { Platform, Pressable, StyleSheet, Switch, Text, View } from 'react-native';
+import { Platform, StyleSheet, View } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import TextButton from '../components/TextButton';
 import IconTextSwitch from '../components/IconTextSwitch';
+import ScreenWidthTextButton from '../components/ScreenWidthTextButton';
 
 const Settings = ( { theme, setTheme, getTheme, setResetData } ) => {
     const styleTheme = theme ? stylesDark : stylesLight
@@ -55,7 +55,7 @@ const Settings = ( { theme, setTheme, getTheme, setResetData } ) => {
                 />
             </View>
             <View style={styleTheme.settingContainer}>
-                <TextButton
+                <ScreenWidthTextButton
                     theme={theme}
                     text="Clear Data"
                     onPressFunction={clearAsyncStorage}
@@ -70,7 +70,8 @@ const stylesLight = StyleSheet.create({
       flex: 1,
       backgroundColor: '#f5f5f5',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'top',
+      paddingTop: 10
     },
     text: {
         color: '#000'
@@ -87,7 +88,8 @@ const stylesDark = StyleSheet.create({
       flex: 1,
       backgroundColor: '#0d0d0d',
       alignItems: 'center',
-      justifyContent: 'center',
+      justifyContent: 'top',
+      paddingTop: 10
     },
     text: {
         color: '#fff'

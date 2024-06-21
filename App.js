@@ -46,7 +46,7 @@ const App = () => {
       .then(res => res.json())
           .then(data => {
               setSights(data);
-              console.log('Succes')
+              console.log('Sights locations succesfully fetched')
           })
 
     } catch (error) {

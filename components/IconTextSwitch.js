@@ -28,7 +28,6 @@ const stylesLight = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
         backgroundColor: '#fff',
         padding: 20,
         marginBottom: 5
@@ -58,7 +57,6 @@ const stylesDark = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        width: '100%',
         backgroundColor: '#171717',
         padding: 20,
         marginBottom: 5
