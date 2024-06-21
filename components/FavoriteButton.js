@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const FavoriteButton = ({ itemKey, resetData }) => {
     const [favorite, setFavorite] = useState(false);
 
-    const storeFavorite = async (value) => { //Store favorite based on unique item key
+    const storeFavorite = async (value) => { //Store favorite value based on unique item key
         try {
             await AsyncStorage.setItem(JSON.stringify(itemKey), JSON.stringify(value));
         } catch (e) {
@@ -15,7 +15,8 @@ const FavoriteButton = ({ itemKey, resetData }) => {
         }
     };
 
-    const getFavorite = async () => { //Get favorite based on unique item key
+    //Get favorite value from aSyncStorage based on unique item key
+    const getFavorite = async () => { 
         try {
           const value = await AsyncStorage.getItem(JSON.stringify(itemKey));
           if (value !== null) {
@@ -36,16 +37,16 @@ const FavoriteButton = ({ itemKey, resetData }) => {
         getFavorite(); 
     }, [])
 
-    // when data is reset, reset favorites aswell on update
+    // when data is reset, reset favorite value to default on update
     useEffect(() => {
         if(resetData === true){
             getFavorite();
         }
-    }, [resetData]) //Rerun when AsyncStorage is cleared
+    }, [resetData]) //Trigger when AsyncStorage is cleared
 
     useEffect(() => {
         storeFavorite(favorite); //Store new changed value in asynstorage
-    }, [favorite]) //Activate whenever favorite's value is changed
+    }, [favorite]) //Trigger whenever favorite's value is changed
 
     return (
         <Pressable 

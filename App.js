@@ -23,14 +23,14 @@ const App = () => {
   //Ask permission to use location
   const askPermissionForUserLocation = async() => {
     try {
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      let { status } = await Location.requestForegroundPermissionsAsync(); //Await user permission
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
       }
 
-      let location = await Location.getCurrentPositionAsync({});
-      setUserLocation(location);
+      let location = await Location.getCurrentPositionAsync({}); //Get current position of user
+      setUserLocation(location); //Update userLocation with current location of user
     } catch (error) {
       console.log("Error requesting location permission:", error)
     }
@@ -44,16 +44,16 @@ const App = () => {
           headers: {Accept: 'application/json'}
       })
       .then(res => res.json())
-          .then(data => {
-              setSights(data);
-              console.log('Sights locations succesfully fetched')
-          })
-
+        .then(data => {
+            setSights(data); //Update sights (Locations) list with data
+            console.log('Sights locations succesfully fetched')
+        })
     } catch (error) {
         console.log(error);
     }
   };
 
+  //Get current stored theme
   const getTheme = async () => {
     try {
       const value = await AsyncStorage.getItem('theme');
@@ -72,7 +72,7 @@ const App = () => {
     }
   };
 
-  //Load data in on startup
+  //Load data on startup
   useEffect(() => {
     if(sights.length === 0){ //Check if already fetched/list filled
       getLocationData();
@@ -81,11 +81,11 @@ const App = () => {
     askPermissionForUserLocation();
   }, [])
 
-  //Load in theme on startup and when data gets reset
+  //Load in theme when data gets reset
   useEffect(() => {
     if(resetData === true){
       getTheme();
-      setResetData(false);
+      setResetData(false); //Once data is reset, set value back to false
     }
   }, [resetData])
   
@@ -133,11 +133,10 @@ const App = () => {
             ),
           }}
         >
-          {(props) => <Settings {...props} theme= {theme} setTheme={setTheme} getTheme={getTheme} setResetData={setResetData}/>}
+          {(props) => <Settings {...props} theme= {theme} setTheme={setTheme} setResetData={setResetData}/>}
         </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>
-    
   );
 }
 

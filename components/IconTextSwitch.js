@@ -6,10 +6,12 @@ const IconTextSwitch = ({ theme, icon, text, value, onValueChangeFunction }) => 
 
     return (
         <View style={styleTheme.container}>
+            {/* Left container */}
             <View style={styleTheme.leftContainer}>
                 <FontAwesome style={styleTheme.icon} name={icon} size={24} color="orange"/>
                 <Text style={styleTheme.text}>{text}</Text>
             </View>
+            {/* Right container */}
             <Switch
                 style={styleTheme.switch}
                 trackColor={{false: '#fff', true: 'orange'}}

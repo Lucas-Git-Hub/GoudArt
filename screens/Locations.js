@@ -6,10 +6,13 @@ const Locations = ( { navigation, sights, theme, resetData } ) => {
 
     return (
         <View style={styleTheme.container}>
+            {/* List of each location */}
             <FlatList
+                style={styleTheme.flatlistContainer}
                 showsVerticalScrollIndicator={false}
                 data={sights}
                 renderItem={({item}) => 
+                    // Render each location with their unique information
                     <LocationListItem
                         navigation={navigation}
                         item={item}
@@ -28,9 +31,10 @@ const stylesLight = StyleSheet.create({
       backgroundColor: '#f5f5f5',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 10,
-      paddingBottom: 0
     },
+    flatlistContainer: {
+        padding: 10
+    }
 });
 
 const stylesDark = StyleSheet.create({
@@ -39,8 +43,10 @@ const stylesDark = StyleSheet.create({
       backgroundColor: '#0d0d0d',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 20
     },
+    flatlistContainer: {
+        padding: 10,
+    }
 });
   
 export default Locations;

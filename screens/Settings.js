@@ -4,9 +4,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import IconTextSwitch from '../components/IconTextSwitch';
 import ScreenWidthTextButton from '../components/ScreenWidthTextButton';
 
-const Settings = ( { theme, setTheme, getTheme, setResetData } ) => {
+const Settings = ( { theme, setTheme, setResetData } ) => {
     const styleTheme = theme ? stylesDark : stylesLight
-    const toggleSwitch = () => setTheme(previousState => !previousState) // Update state when switched;
+    const toggleSwitch = () => setTheme(previousState => !previousState) // Update theme state when switched;
 
     // Store new theme in asynstorage
     const storeTheme = async (value) => {
@@ -18,10 +18,12 @@ const Settings = ( { theme, setTheme, getTheme, setResetData } ) => {
         }
     };
 
-    // Clear storage based on OS (asyncStorage.clear() gives error on iphone)
+    // Clear storage based on OS (asyncStorage.clear() gives error on iphone when already empty)
     const clearAsyncStorage = async() => {
         const AsyncStorageKeys = await AsyncStorage.getAllKeys();
-        if(AsyncStorageKeys.length > 0){
+
+        //When there's values stored clear data
+        if(AsyncStorageKeys.length > 0){ 
             if(Platform.OS === 'android'){
                 await AsyncStorage.clear();
                 console.log("Data Cleared");
@@ -37,13 +39,14 @@ const Settings = ( { theme, setTheme, getTheme, setResetData } ) => {
         }
     }
     
-    // Store new darkmode state when it is changed in asyncstorage
+    // Store new theme state in asyncstorage when the value is changed 
     useEffect(() => {
         theme ? storeTheme("Dark") : storeTheme("Light");
-    }, [theme])
+    }, [theme]) //Trigger on theme value change
 
     return (
         <View style={styleTheme.container}>
+            {/* Theme Setting */}
             <View style={styleTheme.settingContainer}>
                 <IconTextSwitch
                     theme={theme}
@@ -54,6 +57,7 @@ const Settings = ( { theme, setTheme, getTheme, setResetData } ) => {
                     
                 />
             </View>
+            {/* Clear aSyncStorage Setting */}
             <View style={styleTheme.settingContainer}>
                 <ScreenWidthTextButton
                     theme={theme}

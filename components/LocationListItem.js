@@ -8,10 +8,12 @@ const LocationListItem = ({ navigation, item, theme, resetData }) => {
 
     return (
         <View style={styleTheme.container}>
+            {/* Text container with Title and Description of item*/}
             <View style={styleTheme.textContainer}>
                 <Text style={styleTheme.title}>{item.title}</Text>
                 <Text style={styleTheme.description}>{item.description}</Text>
             </View>
+            {/* Button container with goToLocation, Share, Favorite */}
             <View style={styleTheme.buttonsContainer}>
                 <View style={styleTheme.buttonsContainer.buttonContainer}>
                     <GoToLocationButton 

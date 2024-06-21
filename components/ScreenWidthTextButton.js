@@ -7,7 +7,7 @@ const ScreenWidthTextButton = ({ theme, text, onPressFunction }) => {
     return (
         <Pressable 
             style={({pressed}) => [
-                //Display different background when pressed depending on theme
+                //Display different backgroundcolor when pressed depending on current theme
                 theme ? { backgroundColor: pressed ? "#303030" : "#171717"} : { backgroundColor: pressed ? "#e6e6e6" : "#fff"},
                 styleTheme.button
             ]}

@@ -22,7 +22,7 @@ const Map = ( { route, sights, theme } ) => {
         {
             setRegion(route.params)
         }
-    }, [route.params])
+    }, [route.params]) //Trigger when route.params has a value
 
     return (
         <View style={styleTheme.container}>
@@ -34,7 +34,7 @@ const Map = ( { route, sights, theme } ) => {
                 showsCompass={true}
                 customMapStyle={mapStyle} // Only works for android
             >
-                {/* Read sights array and place the markers on the map */}
+                {/* Read sights (locations) array and place the markers on the map */}
                 {sights.map((marker) => (
                     <Marker
                         key={marker.key}

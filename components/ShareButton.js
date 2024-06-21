@@ -7,7 +7,7 @@ const ShareButton = ({ message }) => {
     const shareInfo = async () => {
         try {
             const result = await Share.share({
-                message: message,
+                message: message, 
             })
             if(result.action === Share.sharedAction){
                 if(result.activityType){ //Type can be used depending on what platform they share it on
