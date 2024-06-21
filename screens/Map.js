@@ -41,6 +41,7 @@ const Map = ( { route, sights, theme } ) => {
                         coordinate={marker.coordinates}
                         title={marker.title}
                         description={marker.description}
+                        pinColor='orange'
                     />
                 ))}
             </MapView>
