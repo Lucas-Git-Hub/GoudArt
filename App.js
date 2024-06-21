@@ -16,14 +16,13 @@ const App = () => {
   const [resetData, setResetData] = useState(false);
   const [sights, setSights] = useState([]);
   const [theme, setTheme] = useState(false);
-  const [location, setLocation] = useState(null); // User's current location
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [userLocation, setUserLocation] = useState(null); // User his current location
+  const [errorMsg, setErrorMsg] = useState(null); //Error message for when permission was denied
   const styleTheme = theme ? stylesDark : stylesLight; 
   
   //Ask permission to use location
-  useEffect(() => { 
-    (async () => {
-      
+  const askPermissionForUserLocation = async() => {
+    try {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
@@ -31,19 +30,14 @@ const App = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
-    })();
-  }, []);
-  
-  let text = 'Waiting..';
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
+      setUserLocation(location);
+    } catch (error) {
+      console.log("Error requesting location permission:", error)
+    }
   }
 
   // Get sight locations data
-  async function getLocationData(){
+  const getLocationData = async () => {
     try {
       await fetch("https://lucas-git-hub.github.io/jsonFetch/gouda-sights.json", {
           method: 'GET',
@@ -80,11 +74,10 @@ const App = () => {
 
   //Load data in on startup
   useEffect(() => {
-    if(sights == []){ //Check if already fetched/list filled
-      return;
-    } else {
+    if(sights.length === 0){ //Check if already fetched/list filled
       getLocationData();
     }
+    askPermissionForUserLocation();
   }, [])
 
   //Load in theme on startup and when data gets reset

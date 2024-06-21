@@ -8,6 +8,7 @@ const Settings = ( { theme, setTheme, getTheme, setResetData } ) => {
     const styleTheme = theme ? stylesDark : stylesLight
     const toggleSwitch = () => setTheme(previousState => !previousState) // Update state when switched;
 
+    // Store new theme in asynstorage
     const storeTheme = async (value) => {
         try {
             await AsyncStorage.setItem('theme', value);
