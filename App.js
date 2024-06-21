@@ -85,6 +85,8 @@ const App = () => {
     if(resetData === true){
       getTheme();
       setResetData(false);
+    } else {
+      getTheme();
     }
   }, [resetData])
   
