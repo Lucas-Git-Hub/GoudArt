@@ -13,37 +13,38 @@ import Locations from './screens/Locations';
 const Tab = createBottomTabNavigator();
 
 const App = () => {
-    const [sights, setSights] = useState([]);
-    const [theme, setTheme] = useState(false);
-    const [location, setLocation] = useState(null); // User's current location
-    const [errorMsg, setErrorMsg] = useState(null);
-    const styleTheme = theme ? stylesDark : stylesLight; 
+  const [resetData, setResetData] = useState(false);
+  const [sights, setSights] = useState([]);
+  const [theme, setTheme] = useState(false);
+  const [location, setLocation] = useState(null); // User's current location
+  const [errorMsg, setErrorMsg] = useState(null);
+  const styleTheme = theme ? stylesDark : stylesLight; 
   
-    //Ask permission to use location
-    useEffect(() => { 
-      (async () => {
-        
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied');
-          return;
-        }
-  
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-      })();
-    }, []);
-  
-    let text = 'Waiting..';
-    if (errorMsg) {
-      text = errorMsg;
-    } else if (location) {
-      text = JSON.stringify(location);
-    }
+  //Ask permission to use location
+  useEffect(() => { 
+    (async () => {
+      
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        setErrorMsg('Permission to access location was denied');
+        return;
+      }
 
-    // Get sight locations data
-    async function getLocationData(){
-      try {
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    })();
+  }, []);
+  
+  let text = 'Waiting..';
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
+
+  // Get sight locations data
+  async function getLocationData(){
+    try {
       await fetch("https://lucas-git-hub.github.io/jsonFetch/gouda-sights.json", {
           method: 'GET',
           headers: {Accept: 'application/json'}
@@ -54,9 +55,9 @@ const App = () => {
               console.log('Succes')
           })
 
-      } catch (error) {
-          console.log(error);
-      }
+    } catch (error) {
+        console.log(error);
+    }
   };
 
   const getTheme = async () => {
@@ -77,11 +78,22 @@ const App = () => {
     }
   };
 
-  //Load in data each time you enter the app for updates (on startup)
+  //Load data in on startup
   useEffect(() => {
-    getLocationData();
-    getTheme();
+    if(sights == []){ //Check if already fetched/list filled
+      return;
+    } else {
+      getLocationData();
+    }
   }, [])
+
+  //Load in theme on startup and when data gets reset
+  useEffect(() => {
+    if(resetData === true){
+      getTheme();
+      setResetData(false);
+    }
+  }, [resetData])
   
   return (
     <NavigationContainer>
@@ -102,7 +114,7 @@ const App = () => {
             ),
           }}
         >
-          {(props) => <Locations {...props} sights={sights} theme={theme}/>}
+          {(props) => <Locations {...props} sights={sights} theme={theme} resetData={resetData}/>}
         </Tab.Screen>
         <Tab.Screen 
           name="Map" 
@@ -127,7 +139,7 @@ const App = () => {
             ),
           }}
         >
-          {(props) => <Settings {...props} theme= {theme} setTheme={setTheme} getTheme={getTheme}/>}
+          {(props) => <Settings {...props} theme= {theme} setTheme={setTheme} getTheme={getTheme} setResetData={setResetData}/>}
         </Tab.Screen>
       </Tab.Navigator>
     </NavigationContainer>

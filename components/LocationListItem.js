@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import GoToLocationButton from "./GoToLocationButton";
 import FavoriteButton from "./FavoriteButton";
 
-const LocationListItem = ({ navigation, item, theme }) => {
+const LocationListItem = ({ navigation, item, theme, resetData }) => {
     const styleTheme = theme ? stylesDark : stylesLight;
 
     return (
@@ -20,8 +20,8 @@ const LocationListItem = ({ navigation, item, theme }) => {
                 </View>
                 <View style={styleTheme.buttonsContainer.buttonContainer}>
                     <FavoriteButton
-                        theme={theme}
                         itemKey={item.key}
+                        resetData={resetData}
                     />
                 </View>
             </View>

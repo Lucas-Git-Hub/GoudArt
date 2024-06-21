@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, View } from 'react-native';
 import LocationListItem from '../components/LocationListItem';
 
-const Locations = ( { navigation, sights, theme } ) => {
+const Locations = ( { navigation, sights, theme, resetData } ) => {
     const styleTheme = theme ? stylesDark : stylesLight;
 
     return (
@@ -14,6 +14,7 @@ const Locations = ( { navigation, sights, theme } ) => {
                         navigation={navigation}
                         item={item}
                         theme={theme}
+                        resetData={resetData}
                     />
                 }
             />

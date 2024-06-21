@@ -4,7 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import TextButton from '../components/TextButton';
 import IconTextSwitch from '../components/IconTextSwitch';
 
-const Settings = ( { theme, setTheme, getTheme } ) => {
+const Settings = ( { theme, setTheme, getTheme, setResetData } ) => {
     const styleTheme = theme ? stylesDark : stylesLight
     const toggleSwitch = () => setTheme(previousState => !previousState) // Update state when switched;
 
@@ -25,13 +25,13 @@ const Settings = ( { theme, setTheme, getTheme } ) => {
                 await AsyncStorage.clear();
                 console.log("Data Cleared");
                 // Update to default settings
-                getTheme();
+                setResetData(true);
             }
             if(Platform.OS === 'ios'){
                 await AsyncStorage.multiRemove(AsyncStorageKeys);
                 console.log("Data Cleared");
                 // Update to default settings
-                getTheme();
+                setResetData(true);
             }
         }
     }

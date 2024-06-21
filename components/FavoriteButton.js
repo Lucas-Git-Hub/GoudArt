@@ -3,7 +3,7 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const FavoriteButton = ({ itemKey, theme }) => {
+const FavoriteButton = ({ itemKey, resetData }) => {
     const [favorite, setFavorite] = useState(false);
 
     const storeFavorite = async (value) => { //Store favorite based on unique item key
@@ -20,17 +20,28 @@ const FavoriteButton = ({ itemKey, theme }) => {
           const value = await AsyncStorage.getItem(JSON.stringify(itemKey));
           if (value !== null) {
             // Update favorite according to saved value
-            setFavorite(JSON.parse(value))
+            setFavorite(JSON.parse(value));
+          } else { 
+            // If data is empty reset to default value
+            setFavorite(false);
           }
         } catch (e) {
           // error reading value
-          console.log(e)
+          console.log(e);
         }
-      };
+    };
 
+    //Update favorite according to saved value, on startup
     useEffect(() => {
-        getFavorite(); //Update favorite according to saved value, when first loaded
+        getFavorite(); 
     }, [])
+
+    // when data is reset, reset favorites aswell on update
+    useEffect(() => {
+        if(resetData === true){
+            getFavorite();
+        }
+    }, [resetData]) //Rerun when AsyncStorage is cleared
 
     useEffect(() => {
         storeFavorite(favorite); //Store new changed value in asynstorage
