@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-const ScreenWidthTextButton = ({ theme, text, onPressFunction }) => {
+const ScreenWidthTextButton = ({ theme, icon, text, onPressFunction }) => {
     const styleTheme = theme ? stylesDark : stylesLight;
 
     return (
@@ -15,7 +15,7 @@ const ScreenWidthTextButton = ({ theme, text, onPressFunction }) => {
                 onPressFunction()
             }}
         >
-            <FontAwesome style={styleTheme.icon} name='refresh' size={24} color="orange"/>
+            <FontAwesome style={styleTheme.icon} name={icon} size={24} color="orange"/>
             <Text style={styleTheme.text}>{text}</Text>
         </Pressable>
     )

@@ -61,7 +61,8 @@ const Settings = ( { theme, setTheme, setResetData } ) => {
             <View style={styleTheme.settingContainer}>
                 <ScreenWidthTextButton
                     theme={theme}
-                    text="Clear Data"
+                    icon='refresh'
+                    text='Clear Data'
                     onPressFunction={clearAsyncStorage}
                 />
             </View>
